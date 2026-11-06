@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>忍术练习 VR</title>
+<link rel="icon" href="data:,">
+<script type="importmap">{ "imports": { "three": "./vendor/three.module.min.js" } }</script>
+<style>
+:root{font-family:system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:#edf1f6;background:#10151d}
+*{box-sizing:border-box}body{margin:0}
+header{padding:16px clamp(16px,4vw,48px);display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #29313c;color:#9ba9b9;font-size:14px}
+.brand{color:#f5bb5a;font-weight:800;font-size:16px}
+main{max-width:1280px;margin:auto;padding:clamp(16px,3vw,32px)}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:16px}
+button{font:inherit;font-weight:600;padding:12px 18px;border-radius:12px;border:1px solid #435163;background:#2a3646;color:#edf1f6;cursor:pointer}
+button.primary{background:#f5bb5a;color:#2b1c00;border-color:#f5bb5a}
+button:disabled{opacity:.45;cursor:not-allowed}
+.stage{aspect-ratio:16/9;background:#080b10;border-radius:16px;overflow:hidden}
+.stage canvas{width:100%;height:100%;display:block}
+.hint,#xr-status,#tools-status{color:#a6b2c0;font-size:14px;line-height:1.6;margin:8px 0 0}
+.tools{margin-top:20px;padding:20px;background:#1b2430;border:1px solid #303c4a;border-radius:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.tools input{font:inherit;padding:11px 14px;border-radius:10px;border:1px solid #435163;background:#101720;color:#edf1f6;min-width:240px}
+.tools .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;width:100%}
+</style>
+</head>
+<body>
+<header><span class="brand" data-i18n>忍术练习 VR</span><span data-i18n>手势数据保存在此浏览器</span></header>
+<main>
+  <div class="bar">
+    <button id="enter-vr" class="primary" disabled data-i18n>进入 VR</button>
+    <button id="enter-ar" disabled data-i18n>进入 AR（透视）</button>
+    <span id="xr-status"></span>
+  </div>
+  <div class="stage"><canvas id="view"></canvas></div>
+  <p class="hint" data-i18n>用手柄射线或手部捏合点击按钮；结印时请把手柄放下，使用手部追踪。</p>
+  <section class="tools">
+    <div class="row"><label for="technique-name" data-i18n>新忍术名称</label><input id="technique-name" maxlength="40"></div>
+    <div class="row">
+      <strong data-i18n>导出 / 导入</strong>
+      <button id="export-seals" data-i18n>导出结印</button>
+      <button id="export-jutsu" data-i18n>导出忍术</button>
+      <button id="import" data-i18n>导入结印</button>
+      <input id="import-file" type="file" accept=".json,application/json" hidden>
+    </div>
+    <p id="tools-status" role="status"></p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
